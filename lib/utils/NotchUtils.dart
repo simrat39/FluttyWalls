@@ -7,7 +7,7 @@ class NotchUtils {
   static bool isGestureNavigation = false;
 
   static Future<bool> isDeviceNotched() async {
-    const platform = const MethodChannel('com.example.walls/wallpaper');
+    const platform = const MethodChannel('com.simrat39.flutty_walls/wallpaper');
     try {
       return await platform.invokeMethod('isDeviceNotched').whenComplete(() {});
     } on PlatformException {
@@ -16,7 +16,7 @@ class NotchUtils {
   }
 
   static Future<bool> isUsingGestureNavigation() async {
-    const platform = const MethodChannel('com.example.walls/wallpaper');
+    const platform = const MethodChannel('com.simrat39.flutty_walls/wallpaper');
     try {
       return await platform
           .invokeMethod('isGestureNavigation')
@@ -32,7 +32,7 @@ class NotchUtils {
   }
 
   static Future<double> getNavigationBarHeight() async {
-    const platform = const MethodChannel('com.example.walls/wallpaper');
+    const platform = const MethodChannel('com.simrat39.flutty_walls/wallpaper');
     try {
       return await platform
           .invokeMethod('getNavigationBarHeight')

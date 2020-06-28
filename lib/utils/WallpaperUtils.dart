@@ -90,7 +90,7 @@ class WallpaperUtils {
 
     await sleepN(1000);
 
-    const platform = const MethodChannel('com.example.walls/wallpaper');
+    const platform = const MethodChannel('com.simrat39.flutty_walls/wallpaper');
     var file = await DefaultCacheManager().getSingleFile(url);
     try {
       await platform

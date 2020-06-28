@@ -1,4 +1,4 @@
-package com.example.walls
+package com.simrat39.flutty_walls
 
 import android.app.WallpaperManager
 import android.content.Context
@@ -14,7 +14,7 @@ import java.io.IOException
 import kotlin.math.roundToInt
 
 
-private const val CHANNEL = "com.example.walls/wallpaper"
+private const val CHANNEL = "com.simrat39.flutty_walls/wallpaper"
 class MainActivity: FlutterActivity() {
 
   @RequiresApi(Build.VERSION_CODES.N)

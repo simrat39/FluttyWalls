@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:infinity_ui/infinity_ui.dart';
-
 import 'package:provider/provider.dart';
 
-import '../widgets/colored_scrollbar.dart';
 import '../widgets/FadeIn.dart';
+import '../widgets/SucklessGridViewPage.dart';
 
 import '../models/FavouritesProvider.dart';
 import '../models/WallpaperModel.dart';
@@ -48,28 +46,7 @@ class FavouritesPage extends StatelessWidget {
               }
               favsOld = favs;
             }
-
-            var width = MediaQuery.of(context).size.width;
-            var height = MediaQuery.of(context).size.height;
-            return Container(
-              margin: EdgeInsets.only(
-                  top: InfinityUi.statusBarHeight + (height * 0.01)),
-              padding: EdgeInsets.fromLTRB(width * 0.019, 0, 0, 0.0),
-              child: AccentedScrollbar(
-                highlightColor: Theme.of(context).accentColor,
-                child: Container(
-                  padding: EdgeInsets.only(right: width * 0.019),
-                  child: GridView.count(
-                    physics: BouncingScrollPhysics(),
-                    crossAxisCount: (width * 0.003).ceil(),
-                    childAspectRatio: 0.6,
-                    crossAxisSpacing: 6.0,
-                    mainAxisSpacing: 6.0,
-                    children: favourtiesWidgetList,
-                  ),
-                ),
-              ),
-            );
+            return SucklessGridViewPage(favourtiesWidgetList);
           } else {
             return Center(
               child: Center(

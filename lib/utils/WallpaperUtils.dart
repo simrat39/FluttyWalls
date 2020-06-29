@@ -18,7 +18,8 @@ import '../models/FavouritesProvider.dart';
 import '../widgets/image_tile.dart';
 import '../widgets/suckless_snackbar.dart';
 
-import '../utils/SnackbarUtils.dart';
+import 'SnackbarUtils.dart';
+import 'CollectionUtils.dart';
 
 import '../pages/carousel_page.dart';
 
@@ -39,9 +40,11 @@ class WallpaperUtils {
           url: element["url"],
           name: element["name"],
           author: element["author"],
+          collections: element["collections"],
           index: jsonData.indexOf(element)));
     });
 
+    CollectionUtils.makeCollections();
     createWallsWidgets();
     CarouselItems.makeCarouselItemsList();
   }

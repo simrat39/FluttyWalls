@@ -1,10 +1,18 @@
 class WallpaperModel {
-  final String name;
-  final String url;
-  final String author;
-  final int index;
+  String name;
+  String url;
+  String author;
+  String collections;
+  int index;
 
   static List<WallpaperModel> wallpapers = [];
 
-  WallpaperModel({this.name, this.url, this.author, this.index});
+  WallpaperModel(
+      {String name, String url, String author, String collections, int index}) {
+    this.name = name;
+    this.url = url;
+    this.author = author;
+    this.collections = collections;
+    this.index = index;
+  }
 }

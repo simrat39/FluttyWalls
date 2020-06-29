@@ -16,7 +16,7 @@ class FadeIn extends StatelessWidget {
   Widget build(BuildContext context) {
     final tween = MultiTween<Properties>()
       ..add(Properties.opacity, (0.0).tweenTo(1.0),
-          (200 * delay).round().milliseconds)
+          (100 * delay).round().milliseconds)
       ..add(Properties.offset, (50.0).tweenTo(0.0), 200.milliseconds);
 
     return PlayAnimation<MultiTweenValues<Properties>>(
@@ -32,6 +32,28 @@ class FadeIn extends StatelessWidget {
           ),
           child: child,
         ),
+      ),
+    );
+  }
+}
+
+class Pop extends StatelessWidget {
+  final Widget child;
+
+  Pop(this.child);
+
+  @override
+  Widget build(BuildContext context) {
+    final tween = (0.8).tweenTo(1.0);
+
+    return PlayAnimation(
+      duration: 200.milliseconds,
+      tween: tween,
+      curve: Curves.ease,
+      child: child,
+      builder: (context, child, value) => Transform.scale(
+        scale: value,
+        child: child,
       ),
     );
   }

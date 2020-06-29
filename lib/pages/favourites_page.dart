@@ -48,11 +48,7 @@ class FavouritesPage extends StatelessWidget {
             }
             return SucklessGridViewPage(favourtiesWidgetList);
           } else {
-            return Center(
-              child: Center(
-                child: LinearProgressIndicator(),
-              ),
-            );
+            return Container();
           }
         });
   }

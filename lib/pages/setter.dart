@@ -164,10 +164,8 @@ class _SetterPageState extends State<SetterPage> {
       height = temp;
     }
 
-    var awfullyComplicatedPadding = !NotchUtils.isNotched
-        ? NotchUtils.isGestureNavigation ? 0.0 : InfinityUi.navigationBarHeight
-        : InfinityUi.navigationBarHeight -
-            (InfinityUi.navigationBarHeight * 0.77);
+    var awfullyComplicatedPadding =
+        InfinityUi.navigationBarHeight - (InfinityUi.navigationBarHeight * 0.4);
 
     return Scaffold(
       key: _scaffoldkey,

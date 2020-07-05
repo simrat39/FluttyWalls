@@ -33,7 +33,7 @@ class CustomImageCache extends WidgetsFlutterBinding {
 void main() async {
   CustomImageCache();
   await FavouriteUtils.init();
-  await InfinityUi.enableInfinity();
+  await InfinityUi.enable();
   await NotchUtils.initProperties();
   runApp(RootWindow());
 }

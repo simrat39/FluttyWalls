@@ -9,16 +9,13 @@ import '../models/NavigationModel.dart';
 import '../utils/NotchUtils.dart';
 
 class BottomBar extends StatelessWidget {
+  // TODO: Clean this up, looks like infinity ui fixed notch handeling
   EdgeInsets complicatedMargin(BuildContext context) {
-    double padding = !NotchUtils.isNotched
-        ? InfinityUi.navigationBarHeight
-        : InfinityUi.navigationBarHeight -
-            (InfinityUi.navigationBarHeight * 0.77);
     return EdgeInsets.only(
       bottom: !NotchUtils.isGestureNavigation &&
               (Orientation.landscape == MediaQuery.of(context).orientation)
           ? 0
-          : padding,
+          : InfinityUi.navigationBarHeight,
     );
   }
 

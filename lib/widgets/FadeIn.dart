@@ -15,7 +15,7 @@ class FadeIn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tween = MultiTween<Properties>()
-      ..add(Properties.opacity, (0.0).tweenTo(1.0),
+      ..add(Properties.opacity, (0.8).tweenTo(1.0),
           (100 * delay).round().milliseconds)
       ..add(Properties.offset, (50.0).tweenTo(0.0), 200.milliseconds);
 
@@ -27,8 +27,8 @@ class FadeIn extends StatelessWidget {
         opacity: value.get(Properties.opacity),
         child: Transform.translate(
           offset: Offset(
-            value.get(Properties.offset),
             0,
+            value.get(Properties.offset),
           ),
           child: child,
         ),

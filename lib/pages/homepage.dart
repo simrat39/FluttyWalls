@@ -9,7 +9,10 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Pop(
-        SucklessGridViewPage(WallpaperUtils.wallsWidgetList),
+        SucklessGridViewPage(
+          widgets: WallpaperUtils.wallsWidgetList,
+          headerText: "Wallpapers",
+        ),
       ),
     );
   }

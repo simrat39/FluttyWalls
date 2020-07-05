@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
-import '../widgets/FadeIn.dart';
 import '../widgets/SucklessGridViewPage.dart';
+import '../widgets/FadeIn.dart';
 
 import '../models/FavouritesProvider.dart';
 import '../models/WallpaperModel.dart';
@@ -14,6 +14,7 @@ import '../utils/WallpaperUtils.dart';
 class FavouritesPage extends StatelessWidget {
   Widget wallsGridView(BuildContext context) {
     List<String> favsOld = [];
+    List<Widget> oldFavourtiesWidgetList = [];
     return FutureBuilder(
         future: FavouriteUtils.getFavourites(),
         builder: (context, snapshot) {
@@ -23,10 +24,27 @@ class FavouritesPage extends StatelessWidget {
             List<String> favs = snapshot.data;
 
             if (favs.isEmpty || (favs[0] == null && favs.length == 1)) {
-              return Center(
-                child: Icon(
-                  Icons.favorite_border,
-                  size: 60.0,
+              return FadeIn(
+                2.0,
+                Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Icon(
+                        Icons.favorite_border,
+                        size: 60.0,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 10.0),
+                        child: Text(
+                          "No Favourites",
+                          style: TextStyle(
+                            fontSize: 20.0,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               );
             }
@@ -36,19 +54,23 @@ class FavouritesPage extends StatelessWidget {
                 for (int j = 0; j < WallpaperModel.wallpapers.length; j++) {
                   if (favs[i] == WallpaperModel.wallpapers[j].url) {
                     favourtiesWidgetList.add(
-                      FadeIn(
-                        2,
-                        WallpaperUtils.wallsWidgetList[j],
-                      ),
+                      WallpaperUtils.wallsWidgetList[j],
                     );
                   }
                 }
               }
+              oldFavourtiesWidgetList = favourtiesWidgetList;
               favsOld = favs;
             }
-            return SucklessGridViewPage(favourtiesWidgetList);
+            return SucklessGridViewPage(
+              widgets: favourtiesWidgetList,
+              headerText: "Favourites",
+            );
           } else {
-            return Container();
+            return SucklessGridViewPage(
+              widgets: oldFavourtiesWidgetList,
+              headerText: "Favourites",
+            );
           }
         });
   }

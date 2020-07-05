@@ -32,7 +32,7 @@ class _FavouriteIconState extends State<FavouriteIcon> with AnimationMixin {
     ).animate(
       CurvedAnimation(
         parent: scaleController,
-        curve: Curves.easeOut,
+        curve: Curves.elasticIn,
       ),
     );
   }
@@ -40,7 +40,7 @@ class _FavouriteIconState extends State<FavouriteIcon> with AnimationMixin {
   void heartBeat() {
     scaleController
         .play(
-      duration: 25.milliseconds,
+      duration: 100.milliseconds,
     )
         .whenComplete(() {
       scaleController.reverse().whenComplete(() {

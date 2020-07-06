@@ -44,13 +44,11 @@ class _ImageTileState extends State<ImageTile> {
       height = temp;
     }
 
-    var fav = Provider.of<FavouriteModel>(context);
-
     return ClipRRect(
       borderRadius: BorderRadius.all(Radius.circular(20.0)),
       child: Stack(
         alignment: Alignment.bottomCenter,
-        children: [
+        children: <Widget>[
           GestureDetector(
             onTap: () {
               // Navigator.push(
@@ -127,11 +125,13 @@ class _ImageTileState extends State<ImageTile> {
                         ),
                       ),
                     ),
-                    FavouriteIcon(
-                      url: url,
-                      icon: fav.icon,
-                      press: fav.toggleFavourite,
-                      size: height / width * 12,
+                    Consumer<FavouriteModel>(
+                      builder: (context, fav, child) => FavouriteIcon(
+                        url: url,
+                        icon: fav.icon,
+                        press: fav.toggleFavourite,
+                        size: height / width * 11,
+                      ),
                     ),
                   ],
                 ),

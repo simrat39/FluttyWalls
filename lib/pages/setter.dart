@@ -154,7 +154,6 @@ class _SetterPageState extends State<SetterPage> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
-    var fav = Provider.of<FavouriteModel>(context);
 
     brightness = Theme.of(context).brightness;
 
@@ -336,11 +335,13 @@ class _SetterPageState extends State<SetterPage> {
                                   toggleVisibility();
                                 },
                         ),
-                        FavouriteIcon(
-                          url: url,
-                          icon: fav.icon,
-                          press: fav.toggleFavourite,
-                          size: height / width * 15,
+                        Consumer<FavouriteModel>(
+                          builder: (context, fav, child) => FavouriteIcon(
+                            url: url,
+                            icon: fav.icon,
+                            press: fav.toggleFavourite,
+                            size: height / width * 15,
+                          ),
                         ),
                       ],
                     ),

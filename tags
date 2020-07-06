@@ -4580,7 +4580,6 @@ default_animation_properties	build/app/intermediates/flutter/profile/flutter_bui
 default_animation_properties	build/app/intermediates/flutter/release/flutter_build.d	/^ \/home\/simrat39\/flut\/walls\/build\/app\/intermediates\/flutter\/release\/arm64-v8a\/app.so \//;"	X
 description	web/manifest.json	/^    "description": "A new Flutter project.",$/;"	s
 die	android/gradlew	/^die ( ) {$/;"	f
-die	android/gradlew.bak	/^die ( ) {$/;"	f
 dirName	build/app/intermediates/bundle_manifest/debug/bundle-manifest/output.json	/^        "dirName": ""$/;"	s	object:elements.0.apkData
 dirName	build/app/intermediates/bundle_manifest/profile/bundle-manifest/output.json	/^        "dirName": ""$/;"	s	object:elements.0.apkData
 dirName	build/app/intermediates/bundle_manifest/release/bundle-manifest/output.json	/^        "dirName": ""$/;"	s	object:elements.0.apkData
@@ -16904,7 +16903,6 @@ split	build/sqflite/intermediates/merged_manifests/debug/output.json	/^        "
 split	build/sqflite/intermediates/merged_manifests/profile/output.json	/^        "split": ""$/;"	s	object:elements.0.properties
 split	build/sqflite/intermediates/merged_manifests/release/output.json	/^        "split": ""$/;"	s	object:elements.0.properties
 splitJvmOpts	android/gradlew	/^function splitJvmOpts() {$/;"	f
-splitJvmOpts	android/gradlew.bak	/^function splitJvmOpts() {$/;"	f
 splits	build/app/intermediates/bundle_manifest/debug/bundle-manifest/output.json	/^        "splits": [],$/;"	a	object:elements.0.apkData
 splits	build/app/intermediates/bundle_manifest/profile/bundle-manifest/output.json	/^        "splits": [],$/;"	a	object:elements.0.apkData
 splits	build/app/intermediates/bundle_manifest/release/bundle-manifest/output.json	/^        "splits": [],$/;"	a	object:elements.0.apkData
@@ -22402,7 +22400,6 @@ versionName	build/app/outputs/apk/debug/output.json	/^      "versionName": "1",$
 versionName	build/app/outputs/apk/profile/output.json	/^      "versionName": "1",$/;"	s	object:elements.0
 versionName	build/app/outputs/apk/release/output.json	/^      "versionName": "1",$/;"	s	object:elements.0
 warn	android/gradlew	/^warn ( ) {$/;"	f
-warn	android/gradlew.bak	/^warn ( ) {$/;"	f
 widgets	.dart_tool/flutter_build/025ca5aed0a4752dd30583848a3d4f92/kernel_snapshot.d	/^\/home\/simrat39\/flut\/walls\/.dart_tool\/flutter_build\/025ca5aed0a4752dd30583848a3d4f92\/app./;"	X
 widgets	.dart_tool/flutter_build/32b15885d7f5f6d61af61bab7ee7218a/kernel_snapshot.d	/^\/home\/simrat39\/flut\/walls\/.dart_tool\/flutter_build\/32b15885d7f5f6d61af61bab7ee7218a\/app./;"	X
 widgets	.dart_tool/flutter_build/6c479df5b217102dd11915afd4874d7d/kernel_snapshot.d	/^\/home\/simrat39\/flut\/walls\/.dart_tool\/flutter_build\/6c479df5b217102dd11915afd4874d7d\/app./;"	X

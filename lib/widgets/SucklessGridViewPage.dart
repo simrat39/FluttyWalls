@@ -6,8 +6,10 @@ import 'colored_scrollbar.dart';
 class SucklessGridViewPage extends StatelessWidget {
   final List<Widget> widgets;
   final String headerText;
+  final PageStorageKey key;
 
-  SucklessGridViewPage({@required this.widgets, @required this.headerText});
+  SucklessGridViewPage(
+      {@required this.widgets, @required this.headerText, this.key});
 
   Widget build(BuildContext context) {
     var width = MediaQuery.of(context).size.width;
@@ -44,6 +46,7 @@ class SucklessGridViewPage extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.only(right: width * 0.019),
                   child: GridView.count(
+                    key: key,
                     physics: BouncingScrollPhysics(),
                     crossAxisCount: (width * 0.003).ceil(),
                     childAspectRatio: 0.6,

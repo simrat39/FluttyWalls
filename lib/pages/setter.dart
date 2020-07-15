@@ -24,16 +24,18 @@ class SetterPage extends StatefulWidget {
   final String name;
   final String author;
   final int index;
-  final String heroTag;
-  final String heroTagOther;
+  final String heroTagName;
+  final String heroTagHeart;
+  final String heroTagImage;
 
   SetterPage(
       {this.url,
       this.name,
       this.author,
       this.index,
-      this.heroTag,
-      this.heroTagOther});
+      this.heroTagName,
+      this.heroTagHeart,
+      this.heroTagImage});
   @override
   State<StatefulWidget> createState() {
     return _SetterPageState(url: url, name: name, author: author, index: index);
@@ -184,6 +186,9 @@ class _SetterPageState extends State<SetterPage> {
               imageProvider: NetworkImage(url),
               initialScale: PhotoViewComputedScale.covered,
               minScale: PhotoViewComputedScale.covered * 0.99,
+              heroAttributes: PhotoViewHeroAttributes(
+                tag: widget.heroTagImage,
+              ),
             ),
           ),
           GestureDetector(
@@ -243,7 +248,7 @@ class _SetterPageState extends State<SetterPage> {
                                 Container(
                                   alignment: Alignment.centerRight,
                                   child: Hero(
-                                    tag: widget.heroTag,
+                                    tag: widget.heroTagName,
                                     child: Material(
                                       type: MaterialType.transparency,
                                       child: Text(
@@ -350,7 +355,7 @@ class _SetterPageState extends State<SetterPage> {
                         ),
                         Consumer<FavouriteModel>(
                           builder: (context, fav, child) => Hero(
-                            tag: widget.heroTagOther,
+                            tag: widget.heroTagHeart,
                             child: FavouriteIcon(
                               url: url,
                               icon: fav.icon,

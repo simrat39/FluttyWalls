@@ -37,7 +37,7 @@ class CarouselImageTile extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
         Hero(
-          tag: index.toString() + "FromCarousel",
+          tag: index.toString() + "WeDontWantThisDoWe",
           child: Material(
             type: MaterialType.transparency,
             child: Text(
@@ -66,37 +66,41 @@ class CarouselImageTile extends StatelessWidget {
                     name: name,
                     author: author,
                     index: index,
-                    heroTag: index.toString() + "FromCarousel",
-                    heroTagOther: (Random().nextInt(1000000000) + 100000)
+                    heroTagName: index.toString() + "FromCarouselName",
+                    heroTagHeart: (Random().nextInt(1000000000) + 100000)
                             .toString() +
                         (Random().nextInt(1000000000) + 100000)
                             .toString(), // Some random number, we dont want the hero animation here
+                    heroTagImage: index.toString() + "FromCarouselImage",
                   ),
                 ),
               ),
             );
           },
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(20.0),
-            child: Image(
-              height: orientation == Orientation.portrait
-                  ? height * 0.75
-                  : height * 0.3,
-              width: double.infinity,
-              fit: BoxFit.cover,
-              image: NetworkImage(url),
-              loadingBuilder: (context, child, loadingProgress) {
-                if (loadingProgress == null) return child;
-                return Container(
-                  height: height * 0.7,
-                  child: Center(
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                          Theme.of(context).accentColor),
+          child: Hero(
+            tag: index.toString() + "FromCarouselImage",
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(20.0),
+              child: Image(
+                height: orientation == Orientation.portrait
+                    ? height * 0.75
+                    : height * 0.3,
+                width: double.infinity,
+                fit: BoxFit.cover,
+                image: NetworkImage(url),
+                loadingBuilder: (context, child, loadingProgress) {
+                  if (loadingProgress == null) return child;
+                  return Container(
+                    height: height * 0.7,
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                            Theme.of(context).accentColor),
+                      ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             ),
           ),
         ),

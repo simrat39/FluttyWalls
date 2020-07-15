@@ -78,11 +78,15 @@ class FavouritesPage extends StatelessWidget {
                         name: WallpaperModel.wallpapers[j].name,
                         author: WallpaperModel.wallpapers[j].author,
                         index: WallpaperModel.wallpapers[j].index,
-                        heroTag: WallpaperModel.wallpapers[i].index.toString() +
-                            "FromFavsName",
-                        heroTagOther:
+                        heroTagName:
+                            WallpaperModel.wallpapers[i].index.toString() +
+                                "FromFavsName",
+                        heroTagHeart:
                             WallpaperModel.wallpapers[i].index.toString() +
                                 "FromFavsHeart",
+                        heroTagImage:
+                            WallpaperModel.wallpapers[i].index.toString() +
+                                "FromFavsImage",
                       ),
                     ),
                   );

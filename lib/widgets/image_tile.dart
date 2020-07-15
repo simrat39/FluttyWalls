@@ -16,16 +16,18 @@ class ImageTile extends StatefulWidget {
   final String name;
   final String author;
   final int index;
-  final String heroTag;
-  final String heroTagOther;
+  final String heroTagName;
+  final String heroTagHeart;
+  final String heroTagImage;
 
   ImageTile(
       {this.url,
       this.name,
       this.author,
       this.index,
-      this.heroTag,
-      this.heroTagOther});
+      this.heroTagName,
+      this.heroTagHeart,
+      this.heroTagImage});
   @override
   State<StatefulWidget> createState() {
     return _ImageTileState(url: url, name: name, author: author, index: index);
@@ -55,34 +57,38 @@ class _ImageTileState extends State<ImageTile> {
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: <Widget>[
-          ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(20.0)),
-            child: Container(
-              width: double.infinity,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ChangeNotifierProvider<FavouriteModel>.value(
-                        value: FavouriteModel.providerList[index],
-                        child: SetterPage(
-                          url: url,
-                          name: name,
-                          author: author,
-                          index: index,
-                          heroTag: widget.heroTag,
-                          heroTagOther: widget.heroTagOther,
+          Hero(
+            tag: widget.heroTagImage,
+            child: ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(20.0)),
+              child: Container(
+                width: double.infinity,
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            ChangeNotifierProvider<FavouriteModel>.value(
+                          value: FavouriteModel.providerList[index],
+                          child: SetterPage(
+                            url: url,
+                            name: name,
+                            author: author,
+                            index: index,
+                            heroTagName: widget.heroTagName,
+                            heroTagHeart: widget.heroTagHeart,
+                            heroTagImage: widget.heroTagImage,
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                },
-                child: Image(
-                  image: NetworkImage(url),
-                  fit: BoxFit.cover,
-                  alignment: Alignment.center,
+                    );
+                  },
+                  child: Image(
+                    image: NetworkImage(url),
+                    fit: BoxFit.cover,
+                    alignment: Alignment.center,
+                  ),
                 ),
               ),
             ),
@@ -107,7 +113,7 @@ class _ImageTileState extends State<ImageTile> {
                   children: <Widget>[
                     Expanded(
                       child: Hero(
-                        tag: widget.heroTag,
+                        tag: widget.heroTagName,
                         child: Material(
                           type: MaterialType.transparency,
                           child: Text(
@@ -124,7 +130,7 @@ class _ImageTileState extends State<ImageTile> {
                     ),
                     Consumer<FavouriteModel>(
                       builder: (context, fav, child) => Hero(
-                        tag: widget.heroTagOther,
+                        tag: widget.heroTagHeart,
                         child: FavouriteIcon(
                           url: url,
                           icon: fav.icon,

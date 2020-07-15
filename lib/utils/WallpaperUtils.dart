@@ -70,10 +70,12 @@ class WallpaperUtils {
             name: WallpaperModel.wallpapers[i].name,
             author: WallpaperModel.wallpapers[i].author,
             index: WallpaperModel.wallpapers[i].index,
-            heroTag:
+            heroTagName:
                 WallpaperModel.wallpapers[i].index.toString() + "FromWallsName",
-            heroTagOther: WallpaperModel.wallpapers[i].index.toString() +
+            heroTagHeart: WallpaperModel.wallpapers[i].index.toString() +
                 "FromWallsHeart",
+            heroTagImage: WallpaperModel.wallpapers[i].index.toString() +
+                "FromWallsImage",
           ),
         ),
       );

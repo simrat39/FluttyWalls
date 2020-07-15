@@ -3,8 +3,6 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:provider/provider.dart';
 
-import 'package:photo_view/photo_view.dart';
-
 import '../models/FavouriteModel.dart';
 
 import '../pages/setter.dart';
@@ -49,49 +47,32 @@ class _ImageTileState extends State<ImageTile> {
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: <Widget>[
-          GestureDetector(
-            onTap: () {
-              // Navigator.push(
-              //   context,
-              //   MaterialPageRoute(
-              //     builder: (context) =>
-              //         ChangeNotifierProvider<FavouriteModel>.value(
-              //       value: FavouriteModel.providerList[index],
-              //       child: SetterPage(
-              //         url: url,
-              //         name: name,
-              //         author: author,
-              //         index: index,
-              //       ),
-              //     ),
-              //   ),
-              // );
-            },
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(20.0)),
-              child: Container(
-                width: double.infinity,
-                child: PhotoView(
-                  onTapUp: (context, details, value) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            ChangeNotifierProvider<FavouriteModel>.value(
-                          value: FavouriteModel.providerList[index],
-                          child: SetterPage(
-                            url: url,
-                            name: name,
-                            author: author,
-                            index: index,
-                          ),
+          ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(20.0)),
+            child: Container(
+              width: double.infinity,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          ChangeNotifierProvider<FavouriteModel>.value(
+                        value: FavouriteModel.providerList[index],
+                        child: SetterPage(
+                          url: url,
+                          name: name,
+                          author: author,
+                          index: index,
                         ),
                       ),
-                    );
-                  },
-                  gestureDetectorBehavior: HitTestBehavior.translucent,
-                  initialScale: PhotoViewComputedScale.covered,
-                  imageProvider: NetworkImage(url),
+                    ),
+                  );
+                },
+                child: Image(
+                  image: NetworkImage(url),
+                  fit: BoxFit.cover,
+                  alignment: Alignment.center,
                 ),
               ),
             ),

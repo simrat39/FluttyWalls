@@ -16,8 +16,16 @@ class ImageTile extends StatefulWidget {
   final String name;
   final String author;
   final int index;
+  final String heroTag;
+  final String heroTagOther;
 
-  ImageTile({this.url, this.name, this.author, this.index});
+  ImageTile(
+      {this.url,
+      this.name,
+      this.author,
+      this.index,
+      this.heroTag,
+      this.heroTagOther});
   @override
   State<StatefulWidget> createState() {
     return _ImageTileState(url: url, name: name, author: author, index: index);
@@ -64,6 +72,8 @@ class _ImageTileState extends State<ImageTile> {
                           name: name,
                           author: author,
                           index: index,
+                          heroTag: widget.heroTag,
+                          heroTagOther: widget.heroTagOther,
                         ),
                       ),
                     ),
@@ -96,22 +106,31 @@ class _ImageTileState extends State<ImageTile> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
                     Expanded(
-                      child: Text(
-                        name,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: height / width * 9,
+                      child: Hero(
+                        tag: widget.heroTag,
+                        child: Material(
+                          type: MaterialType.transparency,
+                          child: Text(
+                            name,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: height / width * 9,
+                            ),
+                          ),
                         ),
                       ),
                     ),
                     Consumer<FavouriteModel>(
-                      builder: (context, fav, child) => FavouriteIcon(
-                        url: url,
-                        icon: fav.icon,
-                        press: fav.toggleFavourite,
-                        size: height / width * 11,
+                      builder: (context, fav, child) => Hero(
+                        tag: widget.heroTagOther,
+                        child: FavouriteIcon(
+                          url: url,
+                          icon: fav.icon,
+                          press: fav.toggleFavourite,
+                          size: height / width * 11,
+                        ),
                       ),
                     ),
                   ],

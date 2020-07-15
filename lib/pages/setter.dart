@@ -24,8 +24,16 @@ class SetterPage extends StatefulWidget {
   final String name;
   final String author;
   final int index;
+  final String heroTag;
+  final String heroTagOther;
 
-  SetterPage({this.url, this.name, this.author, this.index});
+  SetterPage(
+      {this.url,
+      this.name,
+      this.author,
+      this.index,
+      this.heroTag,
+      this.heroTagOther});
   @override
   State<StatefulWidget> createState() {
     return _SetterPageState(url: url, name: name, author: author, index: index);
@@ -234,16 +242,21 @@ class _SetterPageState extends State<SetterPage> {
                               children: <Widget>[
                                 Container(
                                   alignment: Alignment.centerRight,
-                                  child: Text(
-                                    name,
-                                    overflow: TextOverflow.fade,
-                                    maxLines: 1,
-                                    softWrap: false,
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600,
-                                      letterSpacing: 1,
-                                      fontSize: height / width * 12,
+                                  child: Hero(
+                                    tag: widget.heroTag,
+                                    child: Material(
+                                      type: MaterialType.transparency,
+                                      child: Text(
+                                        name,
+                                        overflow: TextOverflow.fade,
+                                        maxLines: 1,
+                                        softWrap: false,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: height / width * 12,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -336,11 +349,14 @@ class _SetterPageState extends State<SetterPage> {
                                 },
                         ),
                         Consumer<FavouriteModel>(
-                          builder: (context, fav, child) => FavouriteIcon(
-                            url: url,
-                            icon: fav.icon,
-                            press: fav.toggleFavourite,
-                            size: height / width * 15,
+                          builder: (context, fav, child) => Hero(
+                            tag: widget.heroTagOther,
+                            child: FavouriteIcon(
+                              url: url,
+                              icon: fav.icon,
+                              press: fav.toggleFavourite,
+                              size: height / width * 15,
+                            ),
                           ),
                         ),
                       ],

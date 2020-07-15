@@ -4,12 +4,14 @@ import 'package:provider/provider.dart';
 
 import '../widgets/SucklessGridViewPage.dart';
 import '../widgets/FadeIn.dart';
+import '../widgets/image_tile.dart';
 
 import '../models/FavouritesProvider.dart';
 import '../models/WallpaperModel.dart';
+import '../models/FavouriteModel.dart';
 
 import '../utils/FavouriteUtils.dart';
-import '../utils/WallpaperUtils.dart';
+// import '../utils/WallpaperUtils.dart';
 
 class FavouritesPage extends StatelessWidget {
   Widget wallsGridView(BuildContext context) {
@@ -62,7 +64,27 @@ class FavouritesPage extends StatelessWidget {
               for (int j = 0; j < WallpaperModel.wallpapers.length; j++) {
                 if (favs[i] == WallpaperModel.wallpapers[j].url) {
                   favourtiesWidgetList.add(
-                    WallpaperUtils.wallsWidgetList[j],
+                    MultiProvider(
+                      providers: [
+                        ChangeNotifierProvider<FavouriteModel>.value(
+                          value: FavouriteModel.providerList[j],
+                        ),
+                        ChangeNotifierProvider<FavouritesProvider>.value(
+                          value: FavouritesProvider.provider,
+                        ),
+                      ],
+                      child: ImageTile(
+                        url: WallpaperModel.wallpapers[j].url,
+                        name: WallpaperModel.wallpapers[j].name,
+                        author: WallpaperModel.wallpapers[j].author,
+                        index: WallpaperModel.wallpapers[j].index,
+                        heroTag: WallpaperModel.wallpapers[i].index.toString() +
+                            "FromFavsName",
+                        heroTagOther:
+                            WallpaperModel.wallpapers[i].index.toString() +
+                                "FromFavsHeart",
+                      ),
+                    ),
                   );
                 }
               }

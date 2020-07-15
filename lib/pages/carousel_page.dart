@@ -12,6 +12,7 @@ import '../models/WallpaperModel.dart';
 import '../pages/setter.dart';
 
 import 'dart:ui';
+import 'dart:math';
 
 class CarouselImageTile extends StatelessWidget {
   final String url;
@@ -35,15 +36,21 @@ class CarouselImageTile extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
-        Text(
-          name,
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-          softWrap: true,
-          style: TextStyle(
-            fontWeight: FontWeight.w600,
-            letterSpacing: 2,
-            fontSize: height / width * 13,
+        Hero(
+          tag: index.toString() + "FromCarousel",
+          child: Material(
+            type: MaterialType.transparency,
+            child: Text(
+              name,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              softWrap: true,
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                letterSpacing: 2,
+                fontSize: height / width * 13,
+              ),
+            ),
           ),
         ),
         GestureDetector(
@@ -59,6 +66,11 @@ class CarouselImageTile extends StatelessWidget {
                     name: name,
                     author: author,
                     index: index,
+                    heroTag: index.toString() + "FromCarousel",
+                    heroTagOther: (Random().nextInt(1000000000) + 100000)
+                            .toString() +
+                        (Random().nextInt(1000000000) + 100000)
+                            .toString(), // Some random number, we dont want the hero animation here
                   ),
                 ),
               ),

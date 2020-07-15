@@ -67,12 +67,13 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  Future _wallpaperUtilsInit;
+
   @override
   void initState() {
+    _wallpaperUtilsInit = WallpaperUtils.init();
     super.initState();
   }
-
-  bool loaded = false;
 
   Widget build(BuildContext context) {
     var nav = Provider.of<NavigationModel>(context);
@@ -93,8 +94,11 @@ class _HomeState extends State<Home> {
 
     return Scaffold(
       bottomNavigationBar: BottomBar(),
-      body: loaded
-          ? FadeIndexedStack(
+      body: FutureBuilder(
+        future: _wallpaperUtilsInit,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return FadeIndexedStack(
               duration: Duration(
                 milliseconds: 400,
               ),
@@ -104,29 +108,13 @@ class _HomeState extends State<Home> {
                 FavouritesPage(),
               ],
               index: nav.index,
-            )
-          : FutureBuilder(
-              future: WallpaperUtils.init(),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.done) {
-                  loaded = true;
-                  return FadeIndexedStack(
-                    duration: Duration(
-                      milliseconds: 400,
-                    ),
-                    children: <Widget>[
-                      HomePage(),
-                      CarouselPage(),
-                      FavouritesPage(),
-                    ],
-                    index: nav.index,
-                  );
-                }
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              },
-            ),
+            );
+          }
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        },
+      ),
     );
   }
 }

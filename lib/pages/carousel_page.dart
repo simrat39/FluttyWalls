@@ -57,8 +57,8 @@ class CarouselImageTile extends StatelessWidget {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) =>
+              PageRouteBuilder(
+                pageBuilder: (context, anim, secondAnim) =>
                     ChangeNotifierProvider<FavouriteModel>.value(
                   value: FavouriteModel.providerList[index],
                   child: SetterPage(
@@ -74,6 +74,14 @@ class CarouselImageTile extends StatelessWidget {
                     heroTagImage: index.toString() + "FromCarouselImage",
                   ),
                 ),
+                transitionsBuilder: (context, anim, secondAnim, child) {
+                  var tween = Tween(begin: 0.0, end: 1.0);
+                  var animation = anim.drive(tween);
+                  return FadeTransition(
+                    opacity: animation,
+                    child: child,
+                  );
+                },
               ),
             );
           },

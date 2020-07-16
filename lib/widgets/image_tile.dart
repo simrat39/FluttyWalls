@@ -67,8 +67,8 @@ class _ImageTileState extends State<ImageTile> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) =>
+                      PageRouteBuilder(
+                        pageBuilder: (context, anim, secondAnim) =>
                             ChangeNotifierProvider<FavouriteModel>.value(
                           value: FavouriteModel.providerList[index],
                           child: SetterPage(
@@ -81,11 +81,25 @@ class _ImageTileState extends State<ImageTile> {
                             heroTagImage: widget.heroTagImage,
                           ),
                         ),
+                        transitionsBuilder: (context, anim, secondAnim, child) {
+                          var tween = Tween(begin: 0.0, end: 1.0);
+                          var animation = anim.drive(tween);
+                          return FadeTransition(
+                            opacity: animation,
+                            child: child,
+                          );
+                        },
                       ),
                     );
                   },
                   child: Image(
                     image: NetworkImage(url),
+                    loadingBuilder: (context, child, progress) {
+                      if (progress == null) return child;
+                      return Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
                     fit: BoxFit.cover,
                     alignment: Alignment.center,
                   ),

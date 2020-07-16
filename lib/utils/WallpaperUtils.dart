@@ -5,17 +5,13 @@ import 'package:http/http.dart' as http;
 
 import 'package:gallery_saver/gallery_saver.dart';
 
-import 'package:provider/provider.dart';
-
 import 'package:retry/retry.dart';
 
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 import '../models/WallpaperModel.dart';
 import '../models/FavouriteModel.dart';
-import '../models/FavouritesProvider.dart';
 
-import '../widgets/image_tile.dart';
 import '../widgets/suckless_snackbar.dart';
 
 import 'SnackbarUtils.dart';
@@ -26,8 +22,6 @@ import '../pages/carousel_page.dart';
 import 'dart:convert';
 
 class WallpaperUtils {
-  static List<Widget> wallsWidgetList = [];
-
   static Future<void> init() async {
     var response = await retry(
       () => http.get("http://shishuwalls.bootleggersrom.xyz/wallpapers.json"),
@@ -44,42 +38,12 @@ class WallpaperUtils {
           index: jsonData.indexOf(element)));
     });
 
-    CollectionUtils.makeCollections();
-    createWallsWidgets();
-    CarouselItems.makeCarouselItemsList();
-  }
-
-  static void createWallsWidgets() {
-    wallsWidgetList = [];
-    // wallpapers.shuffle();
     for (int i = 0; i < WallpaperModel.wallpapers.length; i++) {
       FavouriteModel.providerList
           .add(FavouriteModel(WallpaperModel.wallpapers[i].url));
-      wallsWidgetList.add(
-        MultiProvider(
-          providers: [
-            ChangeNotifierProvider<FavouriteModel>.value(
-              value: FavouriteModel.providerList[i],
-            ),
-            ChangeNotifierProvider<FavouritesProvider>.value(
-              value: FavouritesProvider.provider,
-            ),
-          ],
-          child: ImageTile(
-            url: WallpaperModel.wallpapers[i].url,
-            name: WallpaperModel.wallpapers[i].name,
-            author: WallpaperModel.wallpapers[i].author,
-            index: WallpaperModel.wallpapers[i].index,
-            heroTagName:
-                WallpaperModel.wallpapers[i].index.toString() + "FromWallsName",
-            heroTagHeart: WallpaperModel.wallpapers[i].index.toString() +
-                "FromWallsHeart",
-            heroTagImage: WallpaperModel.wallpapers[i].index.toString() +
-                "FromWallsImage",
-          ),
-        ),
-      );
     }
+    CollectionUtils.makeCollections();
+    CarouselItems.makeCarouselItemsList();
   }
 
   // Delay for n milliseconds

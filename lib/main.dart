@@ -35,6 +35,7 @@ void main() async {
   await FavouriteUtils.init();
   await InfinityUi.enable();
   await NotchUtils.initProperties();
+  await WallpaperUtils.init();
   runApp(RootWindow());
 }
 
@@ -67,17 +68,12 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  Future _wallpaperUtilsInit;
-
   @override
   void initState() {
-    _wallpaperUtilsInit = WallpaperUtils.init();
     super.initState();
   }
 
   Widget build(BuildContext context) {
-    var nav = Provider.of<NavigationModel>(context);
-
     if (Theme.of(context).brightness == Brightness.light) {
       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         systemNavigationBarIconBrightness: Brightness.dark,
@@ -94,24 +90,18 @@ class _HomeState extends State<Home> {
 
     return Scaffold(
       bottomNavigationBar: BottomBar(),
-      body: FutureBuilder(
-        future: _wallpaperUtilsInit,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.done) {
-            return FadeIndexedStack(
-              duration: Duration(
-                milliseconds: 400,
-              ),
-              children: <Widget>[
-                HomePage(),
-                CarouselPage(),
-                FavouritesPage(),
-              ],
-              index: nav.index,
-            );
-          }
-          return Center(
-            child: CircularProgressIndicator(),
+      body: Consumer<NavigationModel>(
+        builder: (context, nav, child) {
+          return FadeIndexedStack(
+            duration: Duration(
+              milliseconds: 400,
+            ),
+            children: <Widget>[
+              HomePage(),
+              CarouselPage(),
+              FavouritesPage(),
+            ],
+            index: nav.index,
           );
         },
       ),

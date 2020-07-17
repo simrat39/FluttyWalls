@@ -24,18 +24,18 @@ dependencies:
   flutter:
     sdk: flutter
 
-  http: ^0.12.1
-  cached_network_image: ^2.2.0+1
-  photo_view: ^0.9.2
-  flutter_cache_manager: ^1.4.0
-  gallery_saver: ^2.0.1
-  carousel_slider: ^2.1.0
-  provider: ^4.1.3
-  simple_animations: ^2.2.1
-  retry: ^3.0.0+1
-  infinity_ui: ^0.2.5
+  http:
+  cached_network_image:
+  photo_view:
+  flutter_cache_manager:
+  gallery_saver:
+  carousel_slider:
+  provider:
+  simple_animations:
+  retry:
+  infinity_ui:
   shared_preferences:
-  cupertino_icons: ^0.1.3
+  cupertino_icons:
 
 dev_dependencies:
   flutter_test:

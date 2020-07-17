@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 
 import 'package:infinity_ui/infinity_ui.dart';
 
-import '../widgets/suckless_snackbar.dart';
 import '../widgets/favourites_icon.dart';
 
 import '../models/FavouriteModel.dart';
@@ -320,14 +319,26 @@ class _SetterPageState extends State<SetterPage> {
                           ),
                           onTap: areItemsVisible
                               ? () async {
-                                  var snackBar = SucklessSnackbar(context,
-                                      'Saving wallpaper to gallery...');
+                                  var snackBar = SnackBar(
+                                    content: Text(
+                                      'Saving wallpaper to gallery...',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  );
                                   SnackbarUtils.showSnackBar(
                                       _scaffoldkey, snackBar);
                                   await WallpaperUtils.saveImage(url);
                                   SnackbarUtils.hideSnackbar(_scaffoldkey);
-                                  snackBar = SucklessSnackbar(
-                                      context, 'Wallpaper saved!');
+                                  snackBar = SnackBar(
+                                    content: Text(
+                                      'Wallpaper saved!',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  );
                                   SnackbarUtils.showSnackBar(
                                       _scaffoldkey, snackBar);
                                 }

@@ -44,6 +44,12 @@ class RootWindow extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         accentColor: Colors.blueAccent,
+        snackBarTheme: SnackBarThemeData(
+          backgroundColor: Color(0xff121217), // scaffoldBackgroundColor
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+          behavior: SnackBarBehavior.floating,
+        ),
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,
@@ -51,6 +57,12 @@ class RootWindow extends StatelessWidget {
         dialogBackgroundColor: Color(0xff1a1a1f),
         scaffoldBackgroundColor: Color(0xff121217),
         accentColor: Colors.blue,
+        snackBarTheme: SnackBarThemeData(
+          backgroundColor: Color(0xff121217), // scaffoldBackgroundColor
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(8.0)),
+          behavior: SnackBarBehavior.floating,
+        ),
       ),
       home: ChangeNotifierProvider.value(
         value: NavigationModel.model,

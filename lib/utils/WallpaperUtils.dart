@@ -12,8 +12,6 @@ import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import '../models/WallpaperModel.dart';
 import '../models/FavouriteModel.dart';
 
-import '../widgets/suckless_snackbar.dart';
-
 import 'SnackbarUtils.dart';
 import 'CollectionUtils.dart';
 
@@ -58,7 +56,14 @@ class WallpaperUtils {
 
   static Future<void> setWallpaper(String url, int type, BuildContext context,
       GlobalKey<ScaffoldState> scaffoldKey) async {
-    var snackBar = SucklessSnackbar(context, 'Setting wallpaper');
+    var snackBar = SnackBar(
+      content: Text(
+        'Setting wallpaper',
+        style: TextStyle(
+          color: Colors.white,
+        ),
+      ),
+    );
     SnackbarUtils.showSnackBar(scaffoldKey, snackBar);
 
     await sleepN(1000);
@@ -69,11 +74,25 @@ class WallpaperUtils {
       await platform
           .invokeMethod('setWallpaper', [file.path, type]).whenComplete(() {
         SnackbarUtils.hideSnackbar(scaffoldKey);
-        snackBar = SucklessSnackbar(context, 'Wallpaper set!');
+        snackBar = SnackBar(
+          content: Text(
+            'Wallpaper set!',
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+        );
         SnackbarUtils.showSnackBar(scaffoldKey, snackBar);
       });
     } on PlatformException {
-      snackBar = SucklessSnackbar(context, 'Error setting wallpaper :(');
+      snackBar = SnackBar(
+        content: Text(
+          'Error setting wallpaper :(',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
+      );
       SnackbarUtils.showSnackBar(scaffoldKey, snackBar);
     }
   }

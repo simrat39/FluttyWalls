@@ -12,7 +12,6 @@ import '../models/WallpaperModel.dart';
 import '../pages/setter.dart';
 
 import 'dart:ui';
-import 'dart:math';
 
 class CarouselImageTile extends StatelessWidget {
   final String url;
@@ -96,7 +95,7 @@ class CarouselImageTile extends StatelessWidget {
                 loadingBuilder: (context, child, loadingProgress) {
                   if (loadingProgress == null) return child;
                   return Container(
-                    height: height * 0.7,
+                    height: height * 0.75,
                     child: Center(
                       child: CircularProgressIndicator(
                         valueColor: AlwaysStoppedAnimation<Color>(
@@ -120,12 +119,14 @@ class CarouselItems {
   static Future<void> makeCarouselItemsList() async {
     if (carouselItemsList.isEmpty) {
       for (int i = 0; i < WallpaperModel.wallpapers.length; i++) {
-        carouselItemsList.add(CarouselImageTile(
-          url: WallpaperModel.wallpapers[i].url,
-          name: WallpaperModel.wallpapers[i].name,
-          author: WallpaperModel.wallpapers[i].author,
-          index: WallpaperModel.wallpapers[i].index,
-        ));
+        carouselItemsList.add(
+          CarouselImageTile(
+            url: WallpaperModel.wallpapers[i].url,
+            name: WallpaperModel.wallpapers[i].name,
+            author: WallpaperModel.wallpapers[i].author,
+            index: WallpaperModel.wallpapers[i].index,
+          ),
+        );
       }
     }
   }

@@ -120,7 +120,7 @@ class CarouselImageTile extends StatelessWidget {
 class CarouselItems {
   static List<Widget> carouselItemsList = [];
 
-  static void makeCarouselItemsList() {
+  static Future<void> makeCarouselItemsList() async {
     if (carouselItemsList.isEmpty) {
       for (int i = 0; i < WallpaperModel.wallpapers.length; i++) {
         carouselItemsList.add(CarouselImageTile(
@@ -134,22 +134,46 @@ class CarouselItems {
   }
 }
 
-class CarouselPage extends StatelessWidget {
+class CarouselPage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _CarouselPageState();
+  }
+}
+
+class _CarouselPageState extends State<CarouselPage> {
+  Future _carouelItemsInit;
+
+  @override
+  void initState() {
+    _carouelItemsInit = CarouselItems.makeCarouselItemsList();
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      body: Container(
-        padding: EdgeInsets.only(top: InfinityUi.statusBarHeight),
-        child: CarouselSlider(
-          items: CarouselItems.carouselItemsList,
-          options: CarouselOptions(
-              enlargeCenterPage: true,
-              scrollPhysics: BouncingScrollPhysics(),
-              height: height,
-              initialPage: 0,
-              onPageChanged: (index, reason) {}),
-        ),
+      body: FutureBuilder(
+        future: _carouelItemsInit,
+        builder: (context, snapshot) {
+          if (!(snapshot.connectionState == ConnectionState.done))
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          return Container(
+            padding: EdgeInsets.only(top: InfinityUi.statusBarHeight),
+            child: CarouselSlider(
+              items: CarouselItems.carouselItemsList,
+              options: CarouselOptions(
+                  enlargeCenterPage: true,
+                  scrollPhysics: BouncingScrollPhysics(),
+                  height: height,
+                  initialPage: 0,
+                  onPageChanged: (index, reason) {}),
+            ),
+          );
+        },
       ),
     );
   }

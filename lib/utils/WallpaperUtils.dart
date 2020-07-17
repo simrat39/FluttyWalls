@@ -15,8 +15,6 @@ import '../models/FavouriteModel.dart';
 import 'SnackbarUtils.dart';
 import 'CollectionUtils.dart';
 
-import '../pages/carousel_page.dart';
-
 import 'dart:convert';
 
 class WallpaperUtils {
@@ -41,7 +39,6 @@ class WallpaperUtils {
           .add(FavouriteModel(WallpaperModel.wallpapers[i].url));
     }
     CollectionUtils.makeCollections();
-    CarouselItems.makeCarouselItemsList();
   }
 
   // Delay for n milliseconds

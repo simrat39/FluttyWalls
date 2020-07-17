@@ -35,7 +35,6 @@ void main() async {
   await FavouriteUtils.init();
   await InfinityUi.enable();
   await NotchUtils.initProperties();
-  await WallpaperUtils.init();
   runApp(RootWindow());
 }
 
@@ -80,8 +79,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  Future _wallpapersInit;
+
   @override
   void initState() {
+    _wallpapersInit = WallpaperUtils.init();
     super.initState();
   }
 
@@ -100,23 +102,32 @@ class _HomeState extends State<Home> {
       );
     }
 
-    return Scaffold(
-      bottomNavigationBar: BottomBar(),
-      body: Consumer<NavigationModel>(
-        builder: (context, nav, child) {
-          return FadeIndexedStack(
-            duration: Duration(
-              milliseconds: 400,
+    return FutureBuilder(
+        future: _wallpapersInit,
+        builder: (context, snapshot) {
+          if (!(snapshot.connectionState == ConnectionState.done)) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          return Scaffold(
+            bottomNavigationBar: BottomBar(),
+            body: Consumer<NavigationModel>(
+              builder: (context, nav, child) {
+                return FadeIndexedStack(
+                  duration: Duration(
+                    milliseconds: 400,
+                  ),
+                  children: <Widget>[
+                    HomePage(),
+                    CarouselPage(),
+                    FavouritesPage(),
+                  ],
+                  index: nav.index,
+                );
+              },
             ),
-            children: <Widget>[
-              HomePage(),
-              CarouselPage(),
-              FavouritesPage(),
-            ],
-            index: nav.index,
           );
-        },
-      ),
-    );
+        });
   }
 }

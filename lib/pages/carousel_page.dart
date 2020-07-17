@@ -67,10 +67,7 @@ class CarouselImageTile extends StatelessWidget {
                     author: author,
                     index: index,
                     heroTagName: index.toString() + "FromCarouselName",
-                    heroTagHeart: (Random().nextInt(1000000000) + 100000)
-                            .toString() +
-                        (Random().nextInt(1000000000) + 100000)
-                            .toString(), // Some random number, we dont want the hero animation here
+                    heroTagHeart: index.toString() + "FromCarouselHeart",
                     heroTagImage: index.toString() + "FromCarouselImage",
                   ),
                 ),

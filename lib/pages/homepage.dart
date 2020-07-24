@@ -32,10 +32,10 @@ class HomePage extends StatelessWidget {
         padding: EdgeInsets.only(
           left: width * 0.019,
         ),
-        child: Container(
-          padding: EdgeInsets.only(right: width * 0.019),
-          child: AccentedScrollbar(
-            highlightColor: Theme.of(context).accentColor,
+        child: AccentedScrollbar(
+          highlightColor: Theme.of(context).accentColor,
+          child: Container(
+            padding: EdgeInsets.only(right: width * 0.015),
             child: CustomScrollView(
               physics: BouncingScrollPhysics(),
               slivers: <Widget>[

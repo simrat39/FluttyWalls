@@ -84,6 +84,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
                         .toString(),
                     key: PageStorageKey(
                         CollectionUtils.collections.keys.elementAt(i)),
+                    shouldAddBottomPadding: true,
                   ),
                 ),
               ),

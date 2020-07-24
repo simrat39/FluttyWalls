@@ -3,7 +3,7 @@ import '../models/WallpaperModel.dart';
 class CollectionUtils {
   static Map<String, List<String>> collections = {};
 
-  static void makeCollections() {
+  static Future<void> makeCollections() async {
     List<WallpaperModel> walls = WallpaperModel.wallpapers;
 
     for (int i = 0; i < walls.length; i++) {

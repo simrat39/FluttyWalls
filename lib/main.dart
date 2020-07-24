@@ -8,6 +8,7 @@ import 'widgets/fade_indexed_stack_widget.dart';
 import 'pages/homepage.dart';
 import 'pages/favourites_page.dart';
 import 'pages/carousel_page.dart';
+import 'pages/collections_page.dart';
 
 import 'package:provider/provider.dart';
 
@@ -120,6 +121,7 @@ class _HomeState extends State<Home> {
                   ),
                   children: <Widget>[
                     HomePage(),
+                    CollectionsPage(),
                     CarouselPage(),
                     FavouritesPage(),
                   ],

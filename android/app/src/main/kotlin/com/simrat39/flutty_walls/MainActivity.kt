@@ -99,4 +99,5 @@ class MainActivity: FlutterActivity() {
     if (cutoutMasked == 2) return true
     return false
   }
+
 }

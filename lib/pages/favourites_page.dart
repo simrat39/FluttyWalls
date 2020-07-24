@@ -11,7 +11,6 @@ import '../models/WallpaperModel.dart';
 import '../models/FavouriteModel.dart';
 
 import '../utils/FavouriteUtils.dart';
-// import '../utils/WallpaperUtils.dart';
 
 class FavouritesPage extends StatelessWidget {
   Widget wallsGridView(BuildContext context) {
@@ -95,6 +94,32 @@ class FavouritesPage extends StatelessWidget {
             }
             oldFavourtiesWidgetList = favourtiesWidgetList;
             favsOld = favs;
+          }
+
+          if (favourtiesWidgetList.isEmpty) {
+            return FadeIn(
+              2.0,
+              Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(
+                      Icons.favorite_border,
+                      size: 60.0,
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 10.0),
+                      child: Text(
+                        "No Favourites",
+                        style: TextStyle(
+                          fontSize: 20.0,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
           }
           return SucklessGridViewPage(
             widgets: favourtiesWidgetList,

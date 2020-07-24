@@ -44,6 +44,10 @@ class BottomBar extends StatelessWidget {
               title: Text("Wallpapers"),
             ),
             BottomNavigationBarItem(
+              icon: Icon(Icons.collections),
+              title: Text("Collections"),
+            ),
+            BottomNavigationBarItem(
               icon: Icon(Icons.view_carousel),
               title: Text("Carousel"),
             ),

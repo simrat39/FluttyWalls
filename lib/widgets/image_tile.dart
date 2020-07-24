@@ -119,7 +119,7 @@ class _ImageTileState extends State<ImageTile> {
                     ]),
               ),
               width: double.infinity,
-              height: height * 0.07,
+              height: height * 0.06,
               child: Container(
                 margin: EdgeInsets.fromLTRB(width * 0.03, 0, width * 0.03, 0),
                 child: Row(
@@ -135,8 +135,8 @@ class _ImageTileState extends State<ImageTile> {
                             overflow: TextOverflow.ellipsis,
                             style: TextStyle(
                               color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              fontSize: height / width * 9,
+                              // fontWeight: FontWeight.w600,
+                              fontSize: 15,
                             ),
                           ),
                         ),
@@ -149,7 +149,7 @@ class _ImageTileState extends State<ImageTile> {
                           url: url,
                           icon: fav.icon,
                           press: fav.toggleFavourite,
-                          size: height / width * 11,
+                          size: height / width * 10.5,
                         ),
                       ),
                     ),

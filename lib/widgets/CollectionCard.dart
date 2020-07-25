@@ -44,17 +44,24 @@ class _CollectionCardState extends State<CollectionCard> {
               },
             ),
             Container(
-              color: Colors.black.withOpacity(0.5),
+              color: Colors.black.withOpacity(0.6),
               height: height * 0.3,
             ),
-            Text(
-              widget.name,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 45.0,
+            Hero(
+              tag: widget.name + "nameHeroT",
+              child: Material(
+                type: MaterialType.transparency,
+                child: Text(
+                  widget.name,
+                  textAlign: TextAlign.center,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 60.0,
+                  ),
+                ),
               ),
             ),
             Container(

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../widgets/FadeIn.dart';
 import 'package:simple_animations/simple_animations.dart';
 import 'package:supercharged/supercharged.dart';
 
@@ -13,7 +12,6 @@ class FavouriteIcon extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
     return _FavouriteIconState();
   }
 }
@@ -28,11 +26,11 @@ class _FavouriteIconState extends State<FavouriteIcon> with AnimationMixin {
     scaleController = createController();
     scale = Tween(
       begin: 1.0,
-      end: 1.3,
+      end: 1.2,
     ).animate(
       CurvedAnimation(
         parent: scaleController,
-        curve: Curves.elasticIn,
+        curve: Curves.ease,
       ),
     );
   }
@@ -40,7 +38,7 @@ class _FavouriteIconState extends State<FavouriteIcon> with AnimationMixin {
   void heartBeat() {
     scaleController
         .play(
-      duration: 100.milliseconds,
+      duration: 200.milliseconds,
     )
         .whenComplete(() {
       scaleController.reverse().whenComplete(() {

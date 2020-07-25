@@ -42,7 +42,7 @@ class HomePage extends StatelessWidget {
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: EdgeInsets.only(
-                      top: height * 0.02,
+                      top: InfinityUi.statusBarHeight - (height * 0.02),
                       bottom: height * 0.02,
                     ),
                     child: Text(
@@ -57,9 +57,9 @@ class HomePage extends StatelessWidget {
                 SliverGrid(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: (width * 0.003).ceil(),
-                    childAspectRatio: 0.6,
-                    crossAxisSpacing: 6.0,
-                    mainAxisSpacing: 6.0,
+                    childAspectRatio: 0.634,
+                    crossAxisSpacing: 4.0,
+                    mainAxisSpacing: 4.0,
                   ),
                   delegate: SliverChildBuilderDelegate(
                     (context, index) {

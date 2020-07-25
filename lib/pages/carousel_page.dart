@@ -52,59 +52,78 @@ class CarouselImageTile extends StatelessWidget {
             ),
           ),
         ),
-        GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              PageRouteBuilder(
-                pageBuilder: (context, anim, secondAnim) =>
-                    ChangeNotifierProvider<FavouriteModel>.value(
-                  value: FavouriteModel.providerList[index],
-                  child: SetterPage(
-                    url: url,
-                    name: name,
-                    author: author,
-                    index: index,
-                    heroTagName: index.toString() + "FromCarouselName",
-                    heroTagHeart: index.toString() + "FromCarouselHeart",
-                    heroTagImage: index.toString() + "FromCarouselImage",
+        Hero(
+          tag: index.toString() + "FromCarouselImage",
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(20.0),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Image(
+                  height: orientation == Orientation.portrait
+                      ? height * 0.75
+                      : height * 0.3,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                  image: NetworkImage(url),
+                  loadingBuilder: (context, child, loadingProgress) {
+                    if (loadingProgress == null) return child;
+                    return Container(
+                      height: height * 0.75,
+                      child: Center(
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                              Theme.of(context).accentColor),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                Container(
+                  width: double.infinity,
+                  height: orientation == Orientation.portrait
+                      ? height * 0.75
+                      : height * 0.3,
+                  child: Material(
+                    color: Colors.transparent,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          PageRouteBuilder(
+                            transitionDuration: Duration(milliseconds: 400),
+                            pageBuilder: (context, anim, secondAnim) =>
+                                ChangeNotifierProvider<FavouriteModel>.value(
+                              value: FavouriteModel.providerList[index],
+                              child: SetterPage(
+                                url: url,
+                                name: name,
+                                author: author,
+                                index: index,
+                                heroTagName:
+                                    index.toString() + "FromCarouselName",
+                                heroTagHeart:
+                                    index.toString() + "FromCarouselHeart",
+                                heroTagImage:
+                                    index.toString() + "FromCarouselImage",
+                              ),
+                            ),
+                            transitionsBuilder:
+                                (context, anim, secondAnim, child) {
+                              var tween = Tween(begin: 0.0, end: 1.0);
+                              var animation = anim.drive(tween);
+                              return FadeTransition(
+                                opacity: animation,
+                                child: child,
+                              );
+                            },
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ),
-                transitionsBuilder: (context, anim, secondAnim, child) {
-                  var tween = Tween(begin: 0.0, end: 1.0);
-                  var animation = anim.drive(tween);
-                  return FadeTransition(
-                    opacity: animation,
-                    child: child,
-                  );
-                },
-              ),
-            );
-          },
-          child: Hero(
-            tag: index.toString() + "FromCarouselImage",
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: Image(
-                height: orientation == Orientation.portrait
-                    ? height * 0.75
-                    : height * 0.3,
-                width: double.infinity,
-                fit: BoxFit.cover,
-                image: NetworkImage(url),
-                loadingBuilder: (context, child, loadingProgress) {
-                  if (loadingProgress == null) return child;
-                  return Container(
-                    height: height * 0.75,
-                    child: Center(
-                      child: CircularProgressIndicator(
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                            Theme.of(context).accentColor),
-                      ),
-                    ),
-                  );
-                },
-              ),
+              ],
             ),
           ),
         ),

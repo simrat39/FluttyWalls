@@ -104,32 +104,33 @@ class _HomeState extends State<Home> {
     }
 
     return FutureBuilder(
-        future: _wallpapersInit,
-        builder: (context, snapshot) {
-          if (!(snapshot.connectionState == ConnectionState.done)) {
-            return Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          return Scaffold(
-            bottomNavigationBar: BottomBar(),
-            body: Consumer<NavigationModel>(
-              builder: (context, nav, child) {
-                return FadeIndexedStack(
-                  duration: Duration(
-                    milliseconds: 400,
-                  ),
-                  children: <Widget>[
-                    HomePage(),
-                    CollectionsPage(),
-                    CarouselPage(),
-                    FavouritesPage(),
-                  ],
-                  index: nav.index,
-                );
-              },
-            ),
+      future: _wallpapersInit,
+      builder: (context, snapshot) {
+        if (!(snapshot.connectionState == ConnectionState.done)) {
+          return Center(
+            child: CircularProgressIndicator(),
           );
-        });
+        }
+        return Scaffold(
+          bottomNavigationBar: BottomBar(),
+          body: Consumer<NavigationModel>(
+            builder: (context, nav, child) {
+              return FadeIndexedStack(
+                duration: Duration(
+                  milliseconds: 400,
+                ),
+                children: <Widget>[
+                  HomePage(),
+                  CollectionsPage(),
+                  CarouselPage(),
+                  FavouritesPage(),
+                ],
+                index: nav.index,
+              );
+            },
+          ),
+        );
+      },
+    );
   }
 }

@@ -75,8 +75,11 @@ class _CollectionsPageState extends State<CollectionsPage> {
               i)[r.nextInt(CollectionUtils.collections.values.length)],
           onTap: () {
             Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => Scaffold(
+              PageRouteBuilder(
+                transitionDuration: Duration(
+                  milliseconds: 400,
+                ),
+                pageBuilder: (context, anim, anim2) => Scaffold(
                   body: SucklessGridViewPage(
                     widgets: holder[i],
                     headerText: CollectionUtils.collections.keys
@@ -85,8 +88,27 @@ class _CollectionsPageState extends State<CollectionsPage> {
                     key: PageStorageKey(
                         CollectionUtils.collections.keys.elementAt(i)),
                     shouldAddBottomPadding: true,
+                    shouldHeaderHero: true,
+                    headerHeroTag:
+                        CollectionUtils.collections.keys.elementAt(i) +
+                            "nameHero",
                   ),
                 ),
+                transitionsBuilder:
+                    (context, animation, secondaryAnimation, child) {
+                  var begin = Offset(-1.0, 0.0);
+                  var end = Offset.zero;
+                  var tween = Tween(begin: begin, end: end);
+                  var curvedAnimation = CurvedAnimation(
+                    parent: animation,
+                    curve: Curves.ease,
+                  );
+                  return SlideTransition(
+                    position: tween.animate(curvedAnimation),
+                    textDirection: TextDirection.rtl,
+                    child: child,
+                  );
+                },
               ),
             );
           },
@@ -107,15 +129,14 @@ class _CollectionsPageState extends State<CollectionsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Container(
-          margin: EdgeInsets.only(
-            top: InfinityUi.statusBarHeight,
-          ),
-          child: Column(
-            children: collectionCards,
-          ),
+      body: Padding(
+        padding: EdgeInsets.only(top: InfinityUi.statusBarHeight),
+        child: ListView.builder(
+          physics: BouncingScrollPhysics(),
+          itemBuilder: (context, index) {
+            return collectionCards[index];
+          },
+          itemCount: collectionCards.length,
         ),
       ),
     );

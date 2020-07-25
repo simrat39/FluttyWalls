@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:infinity_ui/infinity_ui.dart';
-import 'package:infinity_ui/infinity_ui.dart';
 
 import 'colored_scrollbar.dart';
 
@@ -9,12 +8,16 @@ class SucklessGridViewPage extends StatelessWidget {
   final String headerText;
   final PageStorageKey key;
   final bool shouldAddBottomPadding;
+  final bool shouldHeaderHero;
+  final String headerHeroTag;
 
   SucklessGridViewPage({
     @required this.widgets,
     @required this.headerText,
     this.key,
     this.shouldAddBottomPadding = false,
+    this.shouldHeaderHero = false,
+    this.headerHeroTag,
   });
 
   Widget build(BuildContext context) {
@@ -39,14 +42,22 @@ class SucklessGridViewPage extends StatelessWidget {
                 SliverToBoxAdapter(
                   child: Padding(
                     padding: EdgeInsets.only(
-                      top: height * 0.02,
+                      top: InfinityUi.statusBarHeight - (height * 0.02),
                       bottom: height * 0.02,
                     ),
-                    child: Text(
-                      headerText,
-                      style: TextStyle(
-                        fontSize: height / width * 30,
-                        fontWeight: FontWeight.bold,
+                    child: Hero(
+                      tag: shouldHeaderHero
+                          ? headerHeroTag
+                          : "WeDontWantHeroIn" + headerText,
+                      child: Material(
+                        type: MaterialType.transparency,
+                        child: Text(
+                          headerText,
+                          style: TextStyle(
+                            fontSize: height / width * 30,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -54,9 +65,9 @@ class SucklessGridViewPage extends StatelessWidget {
                 SliverGrid(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: (width * 0.003).ceil(),
-                    childAspectRatio: 0.6,
-                    crossAxisSpacing: 6.0,
-                    mainAxisSpacing: 6.0,
+                    childAspectRatio: 0.634,
+                    crossAxisSpacing: 4.0,
+                    mainAxisSpacing: 4.0,
                   ),
                   delegate: SliverChildBuilderDelegate(
                     (context, index) {

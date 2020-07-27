@@ -56,12 +56,21 @@ class _ImageTileState extends State<ImageTile> {
               borderRadius: BorderRadius.all(Radius.circular(16.0)),
               child: Container(
                 width: double.infinity,
-                child: Image(
-                  image: NetworkImage(widget.url),
+                child: Image.network(
+                  widget.url,
+                  cacheWidth: 720,
+                  cacheHeight: 1280,
                   loadingBuilder: (context, child, progress) {
                     if (progress == null) return child;
                     return Center(
-                      child: CircularProgressIndicator(),
+                      child: Transform.scale(
+                        scale: 0.6,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 6.0,
+                          value: progress.cumulativeBytesLoaded /
+                              progress.expectedTotalBytes,
+                        ),
+                      ),
                     );
                   },
                   fit: BoxFit.cover,
@@ -90,14 +99,20 @@ class _ImageTileState extends State<ImageTile> {
                           index: widget.index,
                           heroTagName: widget.heroTagName,
                           heroTagHeart: widget.heroTagHeart,
-                          heroTagImage: widget.heroTagImage,
+                          heroTagImage: widget.heroTagImage + "letsnotherothis",
                         ),
                       ),
                       transitionsBuilder: (context, anim, secondAnim, child) {
-                        var tween = Tween(begin: 0.0, end: 1.0);
-                        var animation = anim.drive(tween);
-                        return FadeTransition(
-                          opacity: animation,
+                        var tween = Tween(
+                          begin: Offset(1.0, 0.0),
+                          end: Offset.zero,
+                        );
+                        var curvedAnimation = CurvedAnimation(
+                          parent: anim,
+                          curve: Curves.ease,
+                        );
+                        return SlideTransition(
+                          position: tween.animate(curvedAnimation),
                           child: child,
                         );
                       },

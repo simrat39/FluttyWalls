@@ -101,62 +101,60 @@ class _SetterPageState extends State<SetterPage> {
     });
   }
 
-  Widget wallpaperSetDialog() {
-    return SimpleDialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20.0),
+  Widget wallpaperSetSheet() {
+    return SizedBox(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          ListTile(
+            // padding: EdgeInsets.all(20.0),
+            onTap: () async {
+              Navigator.of(context, rootNavigator: true).pop();
+              await WallpaperUtils.sleepN(200);
+              WallpaperUtils.setWallpaper(url, 1, context, _scaffoldkey);
+            },
+            title: const Text(
+              'Only Home Screen',
+              style: TextStyle(
+                fontSize: 15,
+              ),
+            ),
+            contentPadding: EdgeInsets.symmetric(horizontal: 24),
+          ),
+          ListTile(
+            onTap: () async {
+              Navigator.of(context, rootNavigator: true).pop();
+              await WallpaperUtils.sleepN(200);
+              WallpaperUtils.setWallpaper(url, 2, context, _scaffoldkey);
+            },
+            title: const Text(
+              'Only Lock Screen',
+              style: TextStyle(
+                fontSize: 15,
+              ),
+            ),
+            contentPadding: EdgeInsets.symmetric(horizontal: 24),
+          ),
+          ListTile(
+            onTap: () async {
+              Navigator.of(context, rootNavigator: true).pop();
+              await WallpaperUtils.sleepN(200);
+              WallpaperUtils.setWallpaper(url, 3, context, _scaffoldkey);
+            },
+            title: const Text(
+              'Both',
+              style: TextStyle(
+                fontSize: 15,
+              ),
+            ),
+            contentPadding: EdgeInsets.symmetric(horizontal: 24),
+          ),
+          Container(
+            height: InfinityUi.navigationBarHeight,
+            color: Theme.of(context).backgroundColor,
+          )
+        ],
       ),
-      contentPadding: EdgeInsets.all(15.0),
-      title: const Text(
-        'Select wallpaper type',
-        style: TextStyle(
-          fontSize: 25,
-        ),
-      ),
-      children: <Widget>[
-        SimpleDialogOption(
-          padding: EdgeInsets.all(20.0),
-          onPressed: () async {
-            Navigator.of(context, rootNavigator: true).pop();
-            await WallpaperUtils.sleepN(200);
-            WallpaperUtils.setWallpaper(url, 1, context, _scaffoldkey);
-          },
-          child: const Text(
-            'Only Home Screen',
-            style: TextStyle(
-              fontSize: 15,
-            ),
-          ),
-        ),
-        SimpleDialogOption(
-          padding: EdgeInsets.all(20.0),
-          onPressed: () async {
-            Navigator.of(context, rootNavigator: true).pop();
-            await WallpaperUtils.sleepN(200);
-            WallpaperUtils.setWallpaper(url, 2, context, _scaffoldkey);
-          },
-          child: const Text(
-            'Only Lock Screen',
-            style: TextStyle(
-              fontSize: 15,
-            ),
-          ),
-        ),
-        SimpleDialogOption(
-          padding: EdgeInsets.all(20.0),
-          onPressed: () async {
-            Navigator.of(context, rootNavigator: true).pop();
-            await WallpaperUtils.sleepN(200);
-            WallpaperUtils.setWallpaper(url, 3, context, _scaffoldkey);
-          },
-          child: const Text(
-            'Both',
-            style: TextStyle(
-              fontSize: 15,
-            ),
-          ),
-        ),
-      ],
     );
   }
 
@@ -354,10 +352,10 @@ class _SetterPageState extends State<SetterPage> {
                           ),
                           onTap: areItemsVisible
                               ? () {
-                                  showDialog(
+                                  showModalBottomSheet(
                                       context: context,
                                       builder: (BuildContext context) {
-                                        return wallpaperSetDialog();
+                                        return wallpaperSetSheet();
                                       });
                                 }
                               : () {

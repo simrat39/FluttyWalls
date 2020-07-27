@@ -57,6 +57,9 @@ class RootWindow extends StatelessWidget {
         dialogBackgroundColor: Color(0xff1a1a1f),
         scaffoldBackgroundColor: Color(0xff121217),
         accentColor: Colors.blue,
+        bottomSheetTheme: BottomSheetThemeData(
+          backgroundColor: Color(0xff121217),
+        ),
         snackBarTheme: SnackBarThemeData(
           backgroundColor: Color(0xff121217), // scaffoldBackgroundColor
           shape:

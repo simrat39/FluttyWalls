@@ -13,11 +13,11 @@ import '../models/FavouriteModel.dart';
 import '../utils/FavouriteUtils.dart';
 
 class FavouritesPage extends StatelessWidget {
+  static List<Widget> oldFavourtiesWidgetList = [];
+
   Widget wallsGridView(BuildContext context) {
     final PageStorageKey key = PageStorageKey('key');
 
-    List<String> favsOld = [];
-    List<Widget> oldFavourtiesWidgetList = [];
     return FutureBuilder(
       future: FavouriteUtils.getFavourites(),
       builder: (context, snapshot) {
@@ -58,27 +58,24 @@ class FavouritesPage extends StatelessWidget {
             );
           }
 
-          if (favsOld != favs) {
-            for (int i = 0; i < favs.length; i++) {
-              for (int j = 0; j < WallpaperModel.wallpapers.length; j++) {
-                if (favs[i] == WallpaperModel.wallpapers[j].url) {
-                  favourtiesWidgetList.add(
-                    ChangeNotifierProvider<FavouriteModel>.value(
-                      value: FavouriteModel.providerList[j],
-                      child: ImageTile(
-                        url: WallpaperModel.wallpapers[j].url,
-                        name: WallpaperModel.wallpapers[j].name,
-                        author: WallpaperModel.wallpapers[j].author,
-                        index: WallpaperModel.wallpapers[j].index,
-                      ),
+          for (int i = 0; i < favs.length; i++) {
+            for (int j = 0; j < WallpaperModel.wallpapers.length; j++) {
+              if (favs[i] == WallpaperModel.wallpapers[j].url) {
+                favourtiesWidgetList.add(
+                  ChangeNotifierProvider<FavouriteModel>.value(
+                    value: FavouriteModel.providerList[j],
+                    child: ImageTile(
+                      url: WallpaperModel.wallpapers[j].url,
+                      name: WallpaperModel.wallpapers[j].name,
+                      author: WallpaperModel.wallpapers[j].author,
+                      index: WallpaperModel.wallpapers[j].index,
                     ),
-                  );
-                }
+                  ),
+                );
               }
             }
-            oldFavourtiesWidgetList = favourtiesWidgetList;
-            favsOld = favs;
           }
+          oldFavourtiesWidgetList = favourtiesWidgetList;
 
           if (favourtiesWidgetList.isEmpty) {
             return FadeIn(
@@ -120,7 +117,7 @@ class FavouritesPage extends StatelessWidget {
       body: ChangeNotifierProvider.value(
         value: FavouritesProvider.provider,
         child: Consumer<FavouritesProvider>(
-          builder: (__, _, child) => wallsGridView(context),
+          builder: (context, fav, child) => wallsGridView(context),
         ),
       ),
     );

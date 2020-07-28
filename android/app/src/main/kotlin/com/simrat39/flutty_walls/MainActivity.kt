@@ -35,9 +35,6 @@ class MainActivity: FlutterActivity() {
       } else if (call.method == "isDeviceNotched") {
         val ret = isDeviceNotched()
         result.success(ret)
-      } else if (call.method == "getNavigationBarHeight") {
-        val ret = getNavigationBarHeight()
-        result.success(ret)
       } else if (call.method == "isGestureNavigation") {
         val ret = isGestureNavigation()
         result.success(ret)
@@ -80,15 +77,6 @@ class MainActivity: FlutterActivity() {
     }
     if (statusBarHeight > convertDpToPixel(24.0F)) return true
     return false;
-  }
-
-  private fun getNavigationBarHeight(): Double {
-    val resources = context.resources
-    val resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android")
-    if (resourceId > 0) {
-      return resources.getDimensionPixelSize(resourceId).toDouble()
-    }
-    return 0.0
   }
 
   private fun isGestureNavigation(): Boolean {

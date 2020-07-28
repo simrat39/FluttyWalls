@@ -175,9 +175,6 @@ class _SetterPageState extends State<SetterPage> {
       height = temp;
     }
 
-    var awfullyComplicatedPadding =
-        InfinityUi.navigationBarHeight - (InfinityUi.navigationBarHeight * 0.4);
-
     return WillPopScope(
       onWillPop: () async {
         _scaleController.scaleState = PhotoViewScaleState.initial;
@@ -304,12 +301,10 @@ class _SetterPageState extends State<SetterPage> {
                       width: double.infinity,
                       height: height * 0.1,
                       padding: EdgeInsets.only(
-                          bottom: MediaQuery.of(context).orientation ==
-                                  Orientation.portrait
-                              ? awfullyComplicatedPadding
-                              : !NotchUtils.isGestureNavigation
-                                  ? 0
-                                  : awfullyComplicatedPadding),
+                        bottom: NotchUtils.isGestureNavigation
+                            ? 0
+                            : InfinityUi.navigationBarHeight,
+                      ),
                       decoration: BoxDecoration(
                         gradient: LinearGradient(
                             begin: AlignmentDirectional.topCenter,

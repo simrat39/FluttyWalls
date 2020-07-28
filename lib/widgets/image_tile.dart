@@ -58,8 +58,8 @@ class _ImageTileState extends State<ImageTile> {
                 width: double.infinity,
                 child: Image.network(
                   widget.url,
-                  cacheWidth: 720,
-                  cacheHeight: 1280,
+                  cacheWidth: 630,
+                  cacheHeight: 1120,
                   loadingBuilder: (context, child, progress) {
                     if (progress == null) return child;
                     return Center(

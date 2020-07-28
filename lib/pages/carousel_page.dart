@@ -9,7 +9,7 @@ import 'package:infinity_ui/infinity_ui.dart';
 import '../models/FavouriteModel.dart';
 import '../models/WallpaperModel.dart';
 
-import '../pages/setter.dart';
+import '../pages/SetterPage.dart';
 
 import 'dart:ui';
 
@@ -183,11 +183,12 @@ class _CarouselPageState extends State<CarouselPage> {
             child: CarouselSlider(
               items: CarouselItems.carouselItemsList,
               options: CarouselOptions(
-                  enlargeCenterPage: true,
-                  scrollPhysics: BouncingScrollPhysics(),
-                  height: height,
-                  initialPage: 0,
-                  onPageChanged: (index, reason) {}),
+                enlargeCenterPage: true,
+                scrollPhysics: BouncingScrollPhysics(),
+                height: height,
+                initialPage: 0,
+                onPageChanged: (index, reason) {},
+              ),
             ),
           );
         },

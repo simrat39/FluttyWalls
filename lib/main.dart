@@ -91,7 +91,13 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
-  Widget build(BuildContext context) {
+  @override
+  void didChangeDependencies() {
+    _setSystemUIColors();
+    super.didChangeDependencies();
+  }
+
+  void _setSystemUIColors() {
     if (Theme.of(context).brightness == Brightness.light) {
       SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         systemNavigationBarIconBrightness: Brightness.dark,
@@ -105,7 +111,9 @@ class _HomeState extends State<Home> {
         ),
       );
     }
+  }
 
+  Widget build(BuildContext context) {
     return FutureBuilder(
       future: _wallpapersInit,
       builder: (context, snapshot) {

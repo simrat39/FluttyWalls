@@ -5,13 +5,13 @@ import 'package:provider/provider.dart';
 
 import '../models/FavouriteModel.dart';
 
-import '../pages/setter.dart';
+import '../pages/SetterPage.dart';
 
 import '../widgets/favourites_icon.dart';
 
 import 'dart:ui';
 
-class ImageTile extends StatefulWidget {
+class ImageTile extends StatelessWidget {
   final String url;
   final String name;
   final String author;
@@ -28,13 +28,7 @@ class ImageTile extends StatefulWidget {
       this.heroTagName,
       this.heroTagHeart,
       this.heroTagImage});
-  @override
-  State<StatefulWidget> createState() {
-    return _ImageTileState();
-  }
-}
 
-class _ImageTileState extends State<ImageTile> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
@@ -51,13 +45,13 @@ class _ImageTileState extends State<ImageTile> {
         alignment: Alignment.bottomCenter,
         children: <Widget>[
           Hero(
-            tag: widget.heroTagImage,
+            tag: heroTagImage,
             child: ClipRRect(
               borderRadius: BorderRadius.all(Radius.circular(16.0)),
               child: Container(
                 width: double.infinity,
                 child: Image.network(
-                  widget.url,
+                  url,
                   cacheWidth: 630,
                   cacheHeight: 1120,
                   loadingBuilder: (context, child, progress) {
@@ -91,15 +85,15 @@ class _ImageTileState extends State<ImageTile> {
                       transitionDuration: Duration(milliseconds: 400),
                       pageBuilder: (context, anim, secondAnim) =>
                           ChangeNotifierProvider<FavouriteModel>.value(
-                        value: FavouriteModel.providerList[widget.index],
+                        value: FavouriteModel.providerList[index],
                         child: SetterPage(
-                          url: widget.url,
-                          name: widget.name,
-                          author: widget.author,
-                          index: widget.index,
-                          heroTagName: widget.heroTagName + "no",
-                          heroTagHeart: widget.heroTagHeart + "no",
-                          heroTagImage: widget.heroTagImage + "letsnotherothis",
+                          url: url,
+                          name: name,
+                          author: author,
+                          index: index,
+                          heroTagName: heroTagName + "no",
+                          heroTagHeart: heroTagHeart + "no",
+                          heroTagImage: heroTagImage + "letsnotherothis",
                         ),
                       ),
                       transitionsBuilder: (context, anim, secondAnim, child) {
@@ -151,11 +145,11 @@ class _ImageTileState extends State<ImageTile> {
                     children: <Widget>[
                       Expanded(
                         child: Hero(
-                          tag: widget.heroTagName,
+                          tag: heroTagName,
                           child: Material(
                             type: MaterialType.transparency,
                             child: Text(
-                              widget.name,
+                              name,
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 color: Colors.white,
@@ -172,9 +166,9 @@ class _ImageTileState extends State<ImageTile> {
                         ),
                         child: Consumer<FavouriteModel>(
                           builder: (context, fav, child) => Hero(
-                            tag: widget.heroTagHeart,
+                            tag: heroTagHeart,
                             child: FavouriteIcon(
-                              url: widget.url,
+                              url: url,
                               icon: fav.icon,
                               press: fav.toggleFavourite,
                               size: 20,

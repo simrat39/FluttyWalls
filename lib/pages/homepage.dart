@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../models/FavouritesProvider.dart';
 import '../widgets/image_tile.dart';
 import '../models/FavouriteModel.dart';
+import '../utils/NotchUtils.dart';
 
 class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
@@ -31,6 +32,11 @@ class HomePage extends StatelessWidget {
         ),
         padding: EdgeInsets.only(
           left: width * 0.019,
+          right: Orientation.landscape == MediaQuery.of(context).orientation
+              ? NotchUtils.isGestureNavigation
+                  ? 0
+                  : InfinityUi.navigationBarHeight
+              : 0,
         ),
         child: AccentedScrollbar(
           highlightColor: Theme.of(context).accentColor,

@@ -3,6 +3,8 @@ import 'package:infinity_ui/infinity_ui.dart';
 
 import 'colored_scrollbar.dart';
 
+import '../utils/NotchUtils.dart';
+
 class SucklessGridViewPage extends StatelessWidget {
   final List<Widget> widgets;
   final String headerText;
@@ -30,7 +32,18 @@ class SucklessGridViewPage extends StatelessWidget {
         ),
         padding: EdgeInsets.only(
           left: width * 0.019,
-          bottom: shouldAddBottomPadding ? InfinityUi.navigationBarHeight : 0,
+          bottom: shouldAddBottomPadding
+              ? Orientation.landscape == MediaQuery.of(context).orientation
+                  ? NotchUtils.isGestureNavigation
+                      ? InfinityUi.navigationBarHeight
+                      : 0
+                  : InfinityUi.navigationBarHeight
+              : 0,
+          right: Orientation.landscape == MediaQuery.of(context).orientation
+              ? NotchUtils.isGestureNavigation
+                  ? 0
+                  : InfinityUi.navigationBarHeight
+              : 0,
         ),
         child: AccentedScrollbar(
           highlightColor: Theme.of(context).accentColor,

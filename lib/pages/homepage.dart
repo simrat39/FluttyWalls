@@ -6,7 +6,6 @@ import '../widgets/FadeIn.dart';
 import 'package:infinity_ui/infinity_ui.dart';
 import '../widgets/colored_scrollbar.dart';
 import 'package:provider/provider.dart';
-import '../models/FavouritesProvider.dart';
 import '../widgets/image_tile.dart';
 import '../models/FavouriteModel.dart';
 import '../utils/NotchUtils.dart';

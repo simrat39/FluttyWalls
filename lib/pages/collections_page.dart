@@ -6,7 +6,6 @@ import 'package:infinity_ui/infinity_ui.dart';
 import '../utils/CollectionUtils.dart';
 import '../models/WallpaperModel.dart';
 import '../models/FavouriteModel.dart';
-import '../models/FavouritesProvider.dart';
 import '../widgets/SucklessGridViewPage.dart';
 import '../widgets/image_tile.dart';
 import 'package:provider/provider.dart';

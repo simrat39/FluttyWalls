@@ -16,18 +16,13 @@ class ImageTile extends StatelessWidget {
   final String name;
   final String author;
   final int index;
-  final String heroTagName;
-  final String heroTagHeart;
-  final String heroTagImage;
 
-  ImageTile(
-      {this.url,
-      this.name,
-      this.author,
-      this.index,
-      this.heroTagName,
-      this.heroTagHeart,
-      this.heroTagImage});
+  ImageTile({
+    this.url,
+    this.name,
+    this.author,
+    this.index,
+  });
 
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
@@ -44,32 +39,29 @@ class ImageTile extends StatelessWidget {
       child: Stack(
         alignment: Alignment.bottomCenter,
         children: <Widget>[
-          Hero(
-            tag: heroTagImage,
-            child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(16.0)),
-              child: Container(
-                width: double.infinity,
-                child: Image.network(
-                  url,
-                  cacheWidth: 630,
-                  cacheHeight: 1120,
-                  loadingBuilder: (context, child, progress) {
-                    if (progress == null) return child;
-                    return Center(
-                      child: Transform.scale(
-                        scale: 0.6,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 6.0,
-                          value: progress.cumulativeBytesLoaded /
-                              progress.expectedTotalBytes,
-                        ),
+          ClipRRect(
+            borderRadius: BorderRadius.all(Radius.circular(16.0)),
+            child: Container(
+              width: double.infinity,
+              child: Image.network(
+                url,
+                cacheWidth: 630,
+                cacheHeight: 1120,
+                loadingBuilder: (context, child, progress) {
+                  if (progress == null) return child;
+                  return Center(
+                    child: Transform.scale(
+                      scale: 0.6,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 6.0,
+                        value: progress.cumulativeBytesLoaded /
+                            progress.expectedTotalBytes,
                       ),
-                    );
-                  },
-                  fit: BoxFit.cover,
-                  alignment: Alignment.center,
-                ),
+                    ),
+                  );
+                },
+                fit: BoxFit.cover,
+                alignment: Alignment.center,
               ),
             ),
           ),
@@ -91,9 +83,7 @@ class ImageTile extends StatelessWidget {
                           name: name,
                           author: author,
                           index: index,
-                          heroTagName: heroTagName + "no",
-                          heroTagHeart: heroTagHeart + "no",
-                          heroTagImage: heroTagImage + "letsnotherothis",
+                          heroTagImage: "we dont want to hero",
                         ),
                       ),
                       transitionsBuilder: (context, anim, secondAnim, child) {
@@ -144,19 +134,13 @@ class ImageTile extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Expanded(
-                        child: Hero(
-                          tag: heroTagName,
-                          child: Material(
-                            type: MaterialType.transparency,
-                            child: Text(
-                              name,
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                color: Colors.white,
-                                // fontWeight: FontWeight.w600,
-                                fontSize: 16,
-                              ),
-                            ),
+                        child: Text(
+                          name,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            color: Colors.white,
+                            // fontWeight: FontWeight.w600,
+                            fontSize: 16,
                           ),
                         ),
                       ),
@@ -165,14 +149,11 @@ class ImageTile extends StatelessWidget {
                           left: width * 0.02,
                         ),
                         child: Consumer<FavouriteModel>(
-                          builder: (context, fav, child) => Hero(
-                            tag: heroTagHeart,
-                            child: FavouriteIcon(
-                              url: url,
-                              icon: fav.icon,
-                              press: fav.toggleFavourite,
-                              size: 20,
-                            ),
+                          builder: (context, fav, child) => FavouriteIcon(
+                            url: url,
+                            icon: fav.icon,
+                            press: fav.toggleFavourite,
+                            size: 20,
                           ),
                         ),
                       ),

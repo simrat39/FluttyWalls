@@ -69,29 +69,13 @@ class HomePage extends StatelessWidget {
                   ),
                   delegate: SliverChildBuilderDelegate(
                     (context, index) {
-                      return MultiProvider(
-                        providers: [
-                          ChangeNotifierProvider<FavouriteModel>.value(
-                            value: FavouriteModel.providerList[index],
-                          ),
-                          ChangeNotifierProvider<FavouritesProvider>.value(
-                            value: FavouritesProvider.provider,
-                          ),
-                        ],
+                      return ChangeNotifierProvider<FavouriteModel>.value(
+                        value: FavouriteModel.providerList[index],
                         child: ImageTile(
                           url: WallpaperModel.wallpapers[index].url,
                           name: WallpaperModel.wallpapers[index].name,
                           author: WallpaperModel.wallpapers[index].author,
                           index: WallpaperModel.wallpapers[index].index,
-                          heroTagName: WallpaperModel.wallpapers[index].index
-                                  .toString() +
-                              "FromWallsName",
-                          heroTagHeart: WallpaperModel.wallpapers[index].index
-                                  .toString() +
-                              "FromWallsHeart",
-                          heroTagImage: WallpaperModel.wallpapers[index].index
-                                  .toString() +
-                              "FromWallsImage",
                         ),
                       );
                     },

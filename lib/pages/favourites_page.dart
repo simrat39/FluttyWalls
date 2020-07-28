@@ -63,29 +63,13 @@ class FavouritesPage extends StatelessWidget {
               for (int j = 0; j < WallpaperModel.wallpapers.length; j++) {
                 if (favs[i] == WallpaperModel.wallpapers[j].url) {
                   favourtiesWidgetList.add(
-                    MultiProvider(
-                      providers: [
-                        ChangeNotifierProvider<FavouriteModel>.value(
-                          value: FavouriteModel.providerList[j],
-                        ),
-                        ChangeNotifierProvider<FavouritesProvider>.value(
-                          value: FavouritesProvider.provider,
-                        ),
-                      ],
+                    ChangeNotifierProvider<FavouriteModel>.value(
+                      value: FavouriteModel.providerList[j],
                       child: ImageTile(
                         url: WallpaperModel.wallpapers[j].url,
                         name: WallpaperModel.wallpapers[j].name,
                         author: WallpaperModel.wallpapers[j].author,
                         index: WallpaperModel.wallpapers[j].index,
-                        heroTagName:
-                            WallpaperModel.wallpapers[i].index.toString() +
-                                "FromFavsName",
-                        heroTagHeart:
-                            WallpaperModel.wallpapers[i].index.toString() +
-                                "FromFavsHeart",
-                        heroTagImage:
-                            WallpaperModel.wallpapers[i].index.toString() +
-                                "FromFavsImage",
                       ),
                     ),
                   );

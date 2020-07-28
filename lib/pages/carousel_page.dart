@@ -35,21 +35,15 @@ class CarouselImageTile extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: <Widget>[
-        Hero(
-          tag: index.toString() + "WeDontWantThisDoWe",
-          child: Material(
-            type: MaterialType.transparency,
-            child: Text(
-              name,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              softWrap: true,
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                letterSpacing: 2,
-                fontSize: height / width * 13,
-              ),
-            ),
+        Text(
+          name,
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
+          softWrap: true,
+          style: TextStyle(
+            fontWeight: FontWeight.w600,
+            letterSpacing: 2,
+            fontSize: height / width * 13,
           ),
         ),
         Hero(
@@ -100,10 +94,6 @@ class CarouselImageTile extends StatelessWidget {
                                 name: name,
                                 author: author,
                                 index: index,
-                                heroTagName:
-                                    index.toString() + "FromCarouselName",
-                                heroTagHeart:
-                                    index.toString() + "FromCarouselHeart",
                                 heroTagImage:
                                     index.toString() + "FromCarouselImage",
                               ),
